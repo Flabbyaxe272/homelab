@@ -1,6 +1,6 @@
 # 🏠 flabbyaxe's Homelab
 
-**A production-grade home infrastructure built to solve real problems — not to collect hardware.**
+**A production-grade home infrastructure built to solve real problems, not to collect hardware.**
 
 > *Started with a NAS to cut cloud storage costs. Grew into a zero-trust, SSO-protected, family-serving platform after my mom's memories were sitting on 10-year-old dying hard drives.*
 
@@ -161,12 +161,12 @@ The VPS was added after a DDoS incident on public services. Response: spun up a 
 
 ## 📋 Change Requests
 
-This homelab is managed with formal Change Requests — documented proposals written before implementing significant changes. Each CR covers the problem being solved, alternatives considered, implementation plan, and risks.
+This homelab is managed with formal Change Requests - documented proposals written before implementing significant changes. Each CR covers the problem being solved, alternatives considered, implementation plan, and risks.
 
-| CR | Date | Summary |
-|---|---|---|
-| CR-001 | Sept 2024 | Initial NAS deployment — replacing cloud storage subscriptions |
-| *(additional CRs in `/change-requests`)* | | |
+| CR                                              | Date      | Summary                                                        |
+| ----------------------------------------------- | --------- | -------------------------------------------------------------- |
+| CR-001                                          | Sept 2024 | Initial NAS deployment (replacing cloud storage subscriptions) |
+| *(additional CRs coming in `/change-requests`)* |           |                                                                |
 
 ---
 
@@ -182,7 +182,7 @@ Documenting gaps is part of operating honestly.
 
 ---
 
-## 📁 Repo Structure
+## 📁 Repo Structure (WIP)
 
 ```
 homelab/

@@ -1,0 +1,11 @@
+# Ignore entire Obsidian config folder
+.obsidian/
+
+# Ignore Syncthing Trash folder
+.trash/
+
+# Ignore private folders
+_raw-chats/
+
+# Ignore secrets 
+.env

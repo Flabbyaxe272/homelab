@@ -5,7 +5,7 @@
 .trash/
 
 # Ignore private folders
-_raw-chats/
+_*/
 
 # Ignore secrets 
 .env

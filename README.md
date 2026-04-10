@@ -8,9 +8,8 @@
 
 ## 👤 About
 
-|              |                                                                   |
-| ------------ | ----------------------------------------------------------------- |
 | **Handle**   | flabbyaxe                                                         |
+| ------------ | ----------------------------------------------------------------- |
 | **GitHub**   | [Flabbyaxe272](https://github.com/Flabbyaxe272)                   |
 | **LinkedIn** | [justincfarris272](https://www.linkedin.com/in/justincfarris272/) |
 | **Email**    | justin@farrisfam.org                                              |
@@ -119,11 +118,11 @@ Every public-facing service authenticates through Authentik. One account, one lo
 AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically separated for redundancy. DNS-over-HTTPS is a work in progress.
 
 ### 📁 Storage & Files
-| Service | URL | Notes |
-|---|---|---|
+| Service                   | URL                 | Notes                                               |
+| ------------------------- | ------------------- | --------------------------------------------------- |
 | **NextCloud + Collabora** | cloud.farrisfam.org | Document storage, digital file backup, live editing |
-| **Syncthing** | Internal only | Note syncing across phone and laptops |
-| **TrueNAS** (SMB) | Internal | 15.5TB usable, redundant storage |
+| **Syncthing**             | Internal only       | Note syncing across phone and laptops               |
+| **TrueNAS**               | Internal            | 15.5TB usable, redundant storage                    |
 
 ### 📸 Media
 | Service | URL | Notes |
@@ -174,11 +173,11 @@ This homelab is managed with formal Change Requests - documented proposals writt
 
 Documenting gaps is part of operating honestly.
 
-| Limitation | Impact | Planned Solution |
-|---|---|---|
-| Consumer router as primary firewall | Limited network segmentation | Replace with OPNsense or pfSense |
-| No managed switch | Can't enforce VLAN separation between IoT, servers, clients | Managed switch + VLAN configuration |
-| AdGuard not yet on DNS-over-HTTPS | DNS queries unencrypted in transit | DoH configuration (in progress) |
+| Limitation                          | Impact                                                      | Planned Solution                    |
+| ----------------------------------- | ----------------------------------------------------------- | ----------------------------------- |
+| Consumer router as primary firewall | Limited network segmentation                                | Replace with OPNsense or pfSense    |
+| No managed switch                   | Can't enforce VLAN separation between IoT, servers, clients | Managed switch + VLAN configuration |
+| AdGuard not yet on DNS-over-HTTPS   | DNS queries unencrypted in transit                          | DoH configuration (in progress)     |
 
 ---
 

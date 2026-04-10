@@ -1,4 +1,4 @@
-# Change Request #001 — Network Attached Storage
+# Change Request #001 - Network Attached Storage
 
 **Date:** September 9, 2024 **Status:** Approved
 
@@ -164,13 +164,13 @@ _Note: M-Disc Blu-Ray was evaluated as a long-term archival medium (claimed 50-1
 
 ## Risk Analysis
 
-|Risk|Likelihood|Impact|Mitigation|
-|---|---|---|---|
-|Hardware failure|Low|Medium|ZFS redundancy; documented replacement process|
-|Software failure|Very Low|Medium|Snapshot backups; documented recovery procedures|
-|RAM data corruption|Very Low (1 in ~30 million)|Low-Medium|ECC RAM selected specifically to catch and correct memory errors|
-|Data loss from drive failure|Low-Medium (12% annual failure rate after year 3)|High|ZFS mirror/RAIDZ; drives replaced on 3-5 year cycle|
-|Natural disaster / physical damage|Very Low|High|Offsite snapshot replication; cold storage backup|
+| Risk                               | Likelihood                                        | Impact     | Mitigation                                                       |
+| ---------------------------------- | ------------------------------------------------- | ---------- | ---------------------------------------------------------------- |
+| Hardware failure                   | Low                                               | Medium     | ZFS redundancy; documented replacement process                   |
+| Software failure                   | Very Low                                          | Medium     | Snapshot backups; documented recovery procedures                 |
+| RAM data corruption                | Very Low (1 in ~30 million)                       | Low-Medium | ECC RAM selected specifically to catch and correct memory errors |
+| Data loss from drive failure       | Low-Medium (12% annual failure rate after year 3) | High       | ZFS mirror/RAIDZ; drives replaced on 3-5 year cycle              |
+| Natural disaster / physical damage | Very Low                                          | High       | Offsite snapshot replication; cold storage backup                |
 
 ---
 

@@ -19,7 +19,7 @@
 
 The goal of this change is to gain greater control over content filtering and improve reporting visibility for blocked requests. Open-source filter lists offer broader and more configurable coverage than the current third-party managed DNS service.
 
-A secondary motivation is cost reduction. The current subscription runs approximately $48/year ($4/month). Moving to a self-managed solution — either cloud-hosted or self-hosted — could eliminate or significantly reduce this recurring cost.
+A secondary motivation is cost reduction. The current subscription runs approximately $48/year ($4/month). Moving to a self-managed solution - either cloud-hosted or self-hosted - could eliminate or significantly reduce this recurring cost.
 
 ---
 
@@ -35,11 +35,11 @@ There may be some limitations in per-device attribution depending on router conf
 
 Two hosting approaches are under consideration.
 
-### Option A — Self-Hosting
+### Option A - Self-Hosting
 
-Running the DNS server on existing or new dedicated hardware within the local network. This provides full data ownership but depends on home power and internet reliability. A small dedicated device (e.g., a mini-PC or single-board computer) is recommended for stability over sharing resources with other services.
+Running the DNS server on existing or new dedicated hardware within the local network. This provides full data ownership but depends on home power and internet reliability. A small dedicated device (i.e., a mini-PC or single-board computer) is recommended for stability over sharing resources with other services.
 
-### Option B — Cloud Hosting
+### Option B - Cloud Hosting
 
 Running the DNS server on a cloud provider. The server would run AdGuard Home with HTTPS query support for added security. Devices that travel outside the home network (laptops, phones) would require a CA certificate installed to trust the DNS server.
 
@@ -61,7 +61,7 @@ Running the DNS server on a cloud provider. The server would run AdGuard Home wi
 | Azure | $3.12–$3.90 | 12 months | No (+$2.63/mo) | $109.92 |
 | Google Cloud | $3.99 | 3 months ($300 credit) | Yes | $83.79 |
 | DigitalOcean | $4.00 | No | Yes | $96.00 |
-| *Current service (reference)* | *$4.00* | *—* | *—* | *$96.00* |
+| *Current service (reference)* | *$4.00* | *-* | *-* | *$96.00* |
 
 AWS is the recommended cloud option: lowest 2-year cost, includes a public IP, and has a 12-month free tier. The new DNS server would be validated and confirmed working before canceling the existing subscription.
 
@@ -81,4 +81,4 @@ If the new DNS setup fails or does not meet requirements, network configuration 
 
 ## Open Question
 
-What notification behavior is expected when a blocked site is accessed — alerts, logging only, or both? This may affect which platform or configuration is selected.
+What notification behavior is expected when a blocked site is accessed - alerts, logging only, or both? This may affect which platform or configuration is selected.

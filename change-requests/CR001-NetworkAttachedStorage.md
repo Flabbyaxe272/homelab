@@ -93,7 +93,7 @@ All components verified for compatibility prior to purchase. Prices confirmed at
 
 ### Operating System
 
-**TrueNAS Scale** — selected for the following reasons:
+**TrueNAS Scale** - selected for the following reasons:
 
 - **Linux-based:** Directly applicable to IT skill development
 - **ZFS filesystem:** Self-healing file system that detects and corrects silent data corruption at rest
@@ -118,7 +118,7 @@ All components verified for compatibility prior to purchase. Prices confirmed at
 |Jellyfin|Media library management and streaming|
 |NextCloud|Private cloud storage (replacing OneDrive)|
 
-_Note: WireGuard VPN intentionally excluded from this build — to be implemented on a dedicated edge device in a future CR to avoid exposing the NAS directly to the internet._
+_Note: WireGuard VPN intentionally excluded from this build - to be implemented on a dedicated edge device in a future CR to avoid exposing the NAS directly to the internet._
 
 ### Alternatives Considered
 
@@ -133,7 +133,7 @@ _Note: WireGuard VPN intentionally excluded from this build — to be implemente
 
 **Cons:**
 
-- Poor resource-to-cost ratio: a comparable 4-bay unit with quad-core CPU and 4GB non-ECC RAM costs ~$600 — the custom build doubles the specs for the same price
+- Poor resource-to-cost ratio: a comparable 4-bay unit with quad-core CPU and 4GB non-ECC RAM costs ~$600 - the custom build doubles the specs for the same price
 - Limited upgradeability; many components are soldered or proprietary
 - Closed-source software means security vulnerabilities may go unpatched for extended periods
 - End-of-life risk: when the unit is discontinued, hardware replacement means buying a full new unit plus new drives
@@ -193,7 +193,7 @@ If the plan fails after approval and implementation:
 
 **Why is a NAS more cost-effective than cloud storage?** Cloud storage charges recurring fees that increase with usage and inflation. A NAS is a one-time hardware cost that provides 2-3x more storage than an equivalent cloud subscription, expandable over time. The cost-per-GB on local storage is substantially lower over any multi-year horizon.
 
-**Why this solution over the alternatives?** The alternatives are not bad — some suit different use cases well. This solution was chosen because it best fits the specific goals: data ownership, hands-on learning, long-term cost efficiency, and a platform for future homelab expansion.
+**Why this solution over the alternatives?** The alternatives are not bad - some suit different use cases well. This solution was chosen because it best fits the specific goals: data ownership, hands-on learning, long-term cost efficiency, and a platform for future homelab expansion.
 
 ---
 

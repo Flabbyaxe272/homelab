@@ -23,6 +23,7 @@ Every service in this homelab exists because it solved a real problem. Nothing i
 This started in September 2024 with a formal Change Request to my wife (yes, really) to justify replacing cloud storage subscriptions costing $200+/year with a self-hosted NAS. The math was clear. The proposal was approved. The homelab was born.
 
 What followed was a cascading series of real problems demanding real solutions:
+
 - Family photos on aging hard drives → **Immich + TrueNAS**
 - Non-technical family needing access → **Authentik SSO**
 - Secure remote access without exposing home IP → **WireGuard + VPS**
@@ -45,10 +46,10 @@ Cloudflare (DNS)
 DigitalOcean VPS (Ubuntu Server)
 ├── nginx reverse proxy (entry point)
 ├── WireGuard tunnel (encrypted back-channel)
-└── iptables (geo-IP blocking — US only, DDoS mitigation)
+└── iptables (geo-IP blocking - US only, DDoS mitigation)
     │
     ▼ (via WireGuard tunnel)
-HP Laptop — Ubuntu Server (Edge Device / Traefik RP)
+HP Laptop - Ubuntu Server (Edge Device / Traefik RP)
 ├── Traefik (reverse proxy + TLS termination)
 ├── AdGuard Home DNS1
 └── Authentik (Identity Provider / SSO)
@@ -72,9 +73,10 @@ HP Laptop — Ubuntu Server (Edge Device / Traefik RP)
 
 ## 🖥️ Hardware
 
-### TrueNAS — Main Service Server
+### TrueNAS - Main Service Server
+
 | Component | Spec |
-|---|---|
+| --- | --- |
 | CPU | AMD Ryzen 5 4560 Pro (ECC support) |
 | RAM | 32GB DDR4 ECC |
 | Storage | 30TB raw / 15.5TB usable with redundancy |
@@ -82,17 +84,19 @@ HP Laptop — Ubuntu Server (Edge Device / Traefik RP)
 
 *Started with a 3-way mirror at 3TiB. Expanded with 2×10TB drives (Christmas 2025) to support whole-family photo storage.*
 
-### HP Laptop — Edge Device
+### HP Laptop - Edge Device
+
 | Component | Spec |
-|---|---|
+| --- | --- |
 | OS | Ubuntu Server |
 | Role | Network edge, Traefik reverse proxy, Authentik IdP, AdGuard DNS1 |
 
-*Originally a Docker experimentation device. Repurposed as the network edge device due to its limited compute — keeping heavy services off the critical path.*
+*Originally a Docker experimentation device. Repurposed as the network edge device due to its limited compute - keeping heavy services off the critical path.*
 
 ### Clients
+
 | Name | OS | Purpose |
-|---|---|---|
+| --- | --- | --- |
 | dude-client | Windows | Gaming / HTPC / emulation |
 | second-dude | Windows 11 | School / one-off projects |
 | fourth-dude | Fedora 43 | Main daily driver |
@@ -102,13 +106,15 @@ HP Laptop — Ubuntu Server (Edge Device / Traefik RP)
 ## ⚙️ Services
 
 ### 🔐 Identity & Access
+
 | Service | URL | Notes |
 |---|---|---|
-| **Authentik** | auth.farrisfam.org | Central IdP — OpenID Connect SSO for all services |
+| **Authentik** | auth.farrisfam.org | Central IdP - OpenID Connect SSO for all services |
 
 Every public-facing service authenticates through Authentik. One account, one login, every service. Non-technical family members (parents, siblings) can access Immich and Navidrome without managing multiple credentials.
 
 ### 🌐 Networking & Proxy
+
 | Service | Access | Notes |
 |---|---|---|
 | **Traefik** | Internal | Reverse proxy + automatic TLS |
@@ -118,6 +124,7 @@ Every public-facing service authenticates through Authentik. One account, one lo
 AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically separated for redundancy. DNS-over-HTTPS is a work in progress.
 
 ### 📁 Storage & Files
+
 | Service                   | URL                 | Notes                                               |
 | ------------------------- | ------------------- | --------------------------------------------------- |
 | **NextCloud + Collabora** | cloud.farrisfam.org | Document storage, digital file backup, live editing |
@@ -125,13 +132,15 @@ AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically 
 | **TrueNAS**               | Internal            | 15.5TB usable, redundant storage                    |
 
 ### 📸 Media
+
 | Service | URL | Notes |
 |---|---|---|
-| **Immich** | photos.farrisfam.org | Family photo platform — primary family service |
+| **Immich** | photos.farrisfam.org | Family photo platform - primary family service |
 | **Navidrome** | music.farrisfam.org | Personal music collection streaming |
 | **Jellyfin** | Internal only | Film library |
 
 ### 🛠️ Development
+
 | Service | URL | Notes |
 |---|---|---|
 | **Gitea** | Internal only | Self-hosted git, redundant, mirrors to GitHub |

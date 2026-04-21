@@ -171,10 +171,11 @@ The VPS was added after a DDoS incident on public services. Response: spun up a 
 
 This homelab is managed with formal Change Requests - documented proposals written before implementing significant changes. Each CR covers the problem being solved, alternatives considered, implementation plan, and risks.
 
-| CR                                              | Date      | Summary                                                        |
-| ----------------------------------------------- | --------- | -------------------------------------------------------------- |
-| CR-001                                          | Sept 2024 | Initial NAS deployment (replacing cloud storage subscriptions) |
-| *(additional CRs coming in `/change-requests`)* |           |                                                                |
+| CR         | Date     | Summary/Title                                                  |
+| ---------- | -------- | -------------------------------------------------------------- |
+| CR-001     | Sep 2024 | Initial NAS deployment (replacing cloud storage subscriptions) |
+| CR-002     | Jan 2025 | Adjusting DNS Infrastructure                                   |
+| CR-003     | May 2026 | Home Network Segmentation & Infrastructure Cleanup             |
 
 ---
 

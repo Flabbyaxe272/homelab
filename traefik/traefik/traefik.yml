@@ -1,0 +1,85 @@
+# FILENAME: traefik.yml
+# Last Updated: 2026 May 26
+
+---
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+# --> (Optional) Change log level and format here ...
+#     - level: [TRACE, DEBUG, INFO, WARN, ERROR, FATAL]
+log:
+  level: INFO
+# <--
+
+# --> (Optional) Enable accesslog here ...
+accesslog:
+  filePath: "/var/log/traefik/access.log" 
+  format: common
+# <--
+
+# --> (Optional) Enable API and Dashboard here, don't do in production
+# api: {}
+# <--
+
+# -- Change EntryPoints here...
+entryPoints:
+  web:
+    address: ":80"
+    # Redirect all HTTP to HTTPS
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: ":443"
+    proxyProtocol:
+      trustedIPs:
+        - "10.100.0.1" # Example WireGuard IP to a different network
+    http:
+      tls: {}
+      middlewares:
+        - rate-limit-Global@file
+    transport:
+      respondingTimeouts: # increasing timeouts due to Immich/Nextcloud file upload time [GBs of data (videos) can take a while]
+        readTimeout: 600s
+        idleTimeout: 600s
+        writeTimeout: 600s
+    
+# Minecraft entrypoints for self hosting Minecraft servers.
+########################
+#     Not Active       #
+#     Feb 05 2026      #
+########################
+#  mc-java:
+#    address: ":25565/tcp"
+#  mc-bedrock:
+#    address: ":19132/udp"
+
+
+# -- Configure your CertificateResolver here...
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: example@testy.net
+      storage: /var/traefik/certs/acme.json
+      caServer: "https://acme-v02.api.letsencrypt.org/directory"
+      dnsChallenge:
+        provider: cloudflare  # <-- (Optional) Change this to your DNS provider
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+
+# --> (Optional) Disable TLS Cert verification check
+# serversTransport:
+#   insecureSkipVerify: true
+# <--
+
+providers:
+  docker:
+    exposedByDefault: false
+    network: frontend
+  file:
+    directory: /etc/traefik/config/
+    watch: true

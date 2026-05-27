@@ -197,7 +197,7 @@ Documenting gaps is part of operating honestly.
 homelab/
 ├── README.md
 ├── change-requests/
-│   └── CR-001-nas-deployment.md
+│   └── CR001-NetworkAttachedStorage.md
 ├── architecture/
 │   └── network-diagram.drawio
 │   └── network-diagram.png

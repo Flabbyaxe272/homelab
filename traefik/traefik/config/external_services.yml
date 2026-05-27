@@ -1,0 +1,131 @@
+# External Services
+#
+# Last Updated: 2026 May 26
+#
+# List of services included in this file:
+#   - Gitea (internal service)
+#   - Immich
+#   - Jellyfin
+#   - Nextcloud & Collabora
+#
+# External Services managed by Docker labels: 
+#   - Authentik
+
+
+
+
+http:
+  routers:
+# 
+# ----------> Gitea
+    gitea:
+      rule: "Host(`gitea.example.net`)"
+      entryPoints: websecure
+      tls:
+        certResolver: cloudflare
+      service: gitea
+# <----------
+#
+# ----------> Immich (Farris Fam Photos)
+    immich:
+      rule: "Host(`photos.example.net`)"
+      entryPoints: websecure
+      tls:
+        certResolver: cloudflare
+      service: immich
+# <----------
+#
+# ----------> Jellyfin (Movie Streaming)
+    jellyfin:
+      rule: "Host(`jellyfin.example.net`)"
+      entryPoints: websecure
+      tls:
+        certResolver: cloudflare
+      service: jellyfin
+# <----------
+#
+# ----------> Nextcloud & Collabora (Document Cloud)
+    nextcloud:
+      rule: "Host(`cloud.example.net`)"
+      entryPoints: websecure
+      tls:
+        certResolver: cloudflare
+      service: nextcloud
+    collabora:
+      rule: "Host(`office.example.net`)"
+      entryPoints: websecure
+      tls:
+        certResolver: cloudflare
+      service: collabora
+# <----------
+#
+# ----------> Navidrome
+    navidrome:
+      rule: "Host(`music.example.net`)"
+      priority: 5
+      entryPoints: websecure
+      tls:
+        certResolver: cloudflare
+        domains:
+          - main: "example.net"
+            sans:
+              - "*.example.net"
+      service: navidrome
+      middlewares:
+        - auth-proxy
+        - rate-limit-navidrome
+        - secure-headers
+    navidrome-api:
+      rule: "Host(`music.example.net`) && PathPrefix(`/rest/`)"
+      priority: 10
+      entryPoints: websecure
+      tls:
+        certResolver: cloudflare
+      service: navidrome
+      middlewares:
+        - rate-limit-navidrome
+        - secure-headers
+# <----------
+
+
+
+  services:
+# ----------> Gitea
+    gitea:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.1:30008"
+# <----------
+# 
+# ----------> Immich (Photos) 
+    immich:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.2:30041"
+# <----------
+# 
+# ----------> Jellyfin (Movie Streaming) 
+    jellyfin:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.4:30013"
+# <----------
+# 
+# ----------> Nextcloud & Collabora (Document Cloud)
+    nextcloud:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.3:30027"
+    collabora:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.3:42980"
+# <----------
+#
+# ----------> Navidrome
+    navidrome:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.7:30043"
+        passHostHeader: true
+# <----------          

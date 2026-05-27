@@ -1,0 +1,99 @@
+# Internal Services
+#
+# Last Updated: 2026 May 26
+#
+# List of services included in this file:
+#   - Adguard Home (dns1)
+#   - Syncthing (TrueNAS) Dashboard
+#   - TrueNAS Dashboard
+#   - Minecraft World # NOT ACTIVE (see below)
+#
+# Internal Services managed by Docker labels: 
+#   - portainer dashboard
+#   - AdGuard Home 2 (dns2)
+
+
+http: 
+  routers:
+# ----------> AdGuard Home
+    adGuard:
+      service: adguard
+      rule: "Host(`dns.internal`)"
+      entryPoints: websecure
+      tls: {}
+# <----------
+# ----------> Syncthing (Obisidian vault syncing) Service
+    syncthing:
+      rule: "Host(`sync.internal`)"
+      entryPoints: websecure
+      tls: {}
+      service: syncthing   
+# <----------
+# ----------> TrueNAS Scale Dashboard
+    truenas:
+      rule: "Host(`truenas.internal`)"
+      entryPoints: websecure
+      tls: {}
+      service: truenas
+      middlewares:
+        - auth-proxy@file
+# <----------
+
+
+  services:
+# ----------> AdGuard Home
+    adguard:
+      loadBalancer:
+          servers:
+            - url: "http://192.168.0.1:30004/" # TrueNAS Service
+# <----------
+# ----------> Syncthing (Obisidian vault syncing) Service
+    syncthing:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.6:20910"
+# <----------
+# ----------> TrueNAS Scale Dashboard
+    truenas:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.16.6:80"
+
+
+
+
+
+# ---------- Minecraft World (TCP/UDP) ----------# 
+
+########################
+#     Not Active       #
+#     Feb 05 2026      #
+########################
+
+## ----------> Java vanilla-survival
+#tcp:
+#  routers:
+#    mc-java-vanilla-survival:
+#      entryPoints:
+#        - mc-java
+#      rule: "HostSNI(`*`)"
+#      service: mc-java-vanilla-survival
+#  services:
+#    mc-java-vanilla-survival:
+#      loadBalancer:
+#        servers:
+#          - address: "192.168.16.6:25565"
+## <----------
+## ----------> Bedrock vanilla-survival
+#udp:
+#  routers:
+#    mc-bedrock-vanilla-survival:
+#      entryPoints:
+#        - mc-bedrock
+#      service: mc-bedrock-vanilla-survival
+#  services:
+#    mc-bedrock-vanilla-survival:
+#      loadBalancer:
+#        servers:
+#          - address: "192.168.16.6:19132"
+## <----------

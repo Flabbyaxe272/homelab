@@ -1,0 +1,9 @@
+# FILENAME: dynamic-tls.yml
+# PURPOSE: To provide certs for the Traefik instance
+# Last Updated: 2026 May 26
+
+tls:
+  certificates:
+    - certFile: /internal-certs/example.pem
+      keyFile: /internal-certs/example-key.pem
+

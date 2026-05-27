@@ -1,0 +1,23 @@
+---
+services:
+  traefik:
+    image: docker.io/library/traefik:${VERSION:?VERSION must be set} # Replace with actual desired verison
+    container_name: traefik
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+    labels:
+      # Enable self‑routing
+      - "traefik.enable=true"
+    volumes:
+      - /run/docker.sock:/run/docker.sock:ro
+      - ./traefik/:/etc/traefik/:ro
+      - ./certs/:/var/traefik/certs/:rw
+      - ./internal-certs/:/internal-certs:ro
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN:?API_TOKEN must be set}
+    restart: unless-stopped
+
+networks:
+  frontend:
+    external: true  # <-- (Optional) Change this to false if you want to create a new network (not recommended; easier to create docker network first)

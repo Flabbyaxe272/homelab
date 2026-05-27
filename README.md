@@ -24,11 +24,11 @@ This started in September 2024 with a formal Change Request to my wife (yes, rea
 
 What followed was a cascading series of real problems demanding real solutions:
 
-- Family photos on aging hard drives → **Immich + TrueNAS**
-- Non-technical family needing access → **Authentik SSO**
-- Secure remote access without exposing home IP → **WireGuard + VPS**
-- DDoS attack on public services → **nginx + iptables geo-IP blocking**
-- Password sprawl across services → **Authentik OpenID Connect for everything**
+- Family photos on aging hard drives -> **Immich + TrueNAS**
+- Non-technical family needing access -> **Authentik SSO**
+- Secure remote access without exposing home IP -> **WireGuard + VPS**
+- DDoS attack on public services -> **nginx + iptables geo-IP blocking**
+- Password sprawl across services -> **Authentik OpenID Connect for everything**
 
 The result is a zero-trust home infrastructure serving real non-technical users, maintained by one person, documented like a production environment.
 
@@ -42,14 +42,15 @@ Internet
     ▼
 Cloudflare (DNS)
     │
+    ├──▶ TrueNAS Server (Main Services)
     ▼
 DigitalOcean VPS (Ubuntu Server)
-├── nginx reverse proxy (entry point)
+├── nginx stream (entry point)
 ├── WireGuard tunnel (encrypted back-channel)
 └── iptables (geo-IP blocking - US only, DDoS mitigation)
     │
     ▼ (via WireGuard tunnel)
-HP Laptop - Ubuntu Server (Edge Device / Traefik RP)
+Dude-server (Edge Device)
 ├── Traefik (reverse proxy + TLS termination)
 ├── AdGuard Home DNS1
 └── Authentik (Identity Provider / SSO)
@@ -93,14 +94,6 @@ HP Laptop - Ubuntu Server (Edge Device / Traefik RP)
 
 *Originally a Docker experimentation device. Repurposed as the network edge device due to its limited compute - keeping heavy services off the critical path.*
 
-### Clients
-
-| Name | OS | Purpose |
-| --- | --- | --- |
-| dude-client | Windows | Gaming / HTPC / emulation |
-| second-dude | Windows 11 | School / one-off projects |
-| fourth-dude | Fedora 43 | Main daily driver |
-
 ---
 
 ## ⚙️ Services
@@ -141,9 +134,9 @@ AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically 
 
 ### 🛠️ Development
 
-| Service | URL | Notes |
-|---|---|---|
-| **Gitea** | Internal only | Self-hosted git, redundant, mirrors to GitHub |
+| Service        | URL                   | Notes                                                      |
+| -------------- | --------------------- | ---------------------------------------------------------- |
+| **Gitea**      | Internal only         | Self-hosted git, redundant, mirrors to GitHub              |
 | **Recipebook** | recipes.farrisfam.org | MkDocs site, built in Gitea, deployed via Cloudflare Pages |
 
 ---
@@ -153,12 +146,12 @@ AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically 
 Public services never directly expose the home network. The full traffic path for an external request:
 
 ```
-User → Cloudflare DNS → DigitalOcean VPS
-    → nginx (entry point) + iptables (geo-block non-US IPs)
-    → WireGuard encrypted tunnel
-    → Traefik (reverse proxy + TLS)
-    → Authentik (auth check)
-    → Service
+User -> Cloudflare DNS -> DigitalOcean VPS
+    -> nginx (entry point) + iptables (geo-block non-US IPs)
+    -> WireGuard encrypted tunnel
+    -> Traefik (reverse proxy + TLS)
+    -> Authentik (auth check)
+    -> Service
 ```
 
 The VPS was added after a DDoS incident on public services. Response: spun up a DigitalOcean droplet, configured nginx as a proxy, implemented iptables rules to block non-US traffic. Incident resolved. Geo-blocking has been in place since.
@@ -197,25 +190,21 @@ Documenting gaps is part of operating honestly.
 homelab/
 ├── README.md
 ├── change-requests/
-│   └── CR001-NetworkAttachedStorage.md
+│   ├── CR001-NetworkAttachedStorage.md
+│   ├── CR002-CloudDnsServer.md
+│   └── CR003-NetworkUpgrade.md
 ├── architecture/
-│   └── network-diagram.drawio
-│   └── network-diagram.png
-├── authentik/
-│   ├── docker-compose.yml
-│   ├── .env.example
-│   └── README.md
+│   ├── network-diagram.drawio           # Coming soon
+│   └── network-diagram.png              # Coming soon
+├── authentik/                           # Coming soon
+│   ├── docker-compose.yml               # Coming soon
+│   ├── .env.example                     # Coming soon
+│   └── README.md                        # Coming soon
 ├── traefik/
 │   ├── docker-compose.yml
 │   ├── .env.example
 │   └── README.md
-├── adguard/
-├── nextcloud/
-├── immich/
-├── navidrome/
-├── jellyfin/
-├── gitea/
-└── syncthing/
+└── adguard/                             # Coming soon
 ```
 
 ---

@@ -43,6 +43,7 @@ Internet
 Cloudflare (DNS)
     │
     ├──▶ Cloudflare Pages (offsite)
+    |     ├── Blog/portfolio (justin.farrisfam.org)
     |     └── Recipebook (recipes.farrisfam.org)
     |
     ▼

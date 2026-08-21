@@ -42,6 +42,9 @@ Internet
     ▼
 Cloudflare (DNS)
     │
+    ├──▶ Cloudflare Pages (offsite)
+    |     └── Recipebook (recipes.farrisfam.org)
+    |
     ▼
 DigitalOcean VPS (Ubuntu Server)
 ├── nginx stream (entry point)
@@ -54,17 +57,15 @@ Dude-server (Edge Device)
 ├── AdGuard Home DNS1
 └── Authentik (Identity Provider / SSO)
     │
-    ├──▶ TrueNAS Server (Main Services)
-    │     ├── Immich (photos.farrisfam.org)
-    │     ├── NextCloud + Collabora (cloud.farrisfam.org)
-    │     ├── Navidrome (music.farrisfam.org)
-    │     ├── Jellyfin (local only)
-    │     ├── Gitea (local only, mirrored to GitHub)
-    │     ├── Syncthing (local only)
-    │     └── AdGuard Home DNS2 (redundant)
-    │
-    └──▶ Cloudflare Pages (offsite)
-          └── Recipebook (recipes.farrisfam.org)
+    └──▶ TrueNAS Server (Main Services)
+          ├── Immich (photos.farrisfam.org)
+          ├── NextCloud + Collabora (cloud.farrisfam.org)
+          ├── Navidrome (music.farrisfam.org)
+          ├── Jellyfin (local only)
+          ├── Gitea (local only, mirrored to GitHub)
+          ├── Syncthing (local only)
+          └── AdGuard Home DNS2 (redundant)
+
 ```
 
 **Tailscale** provides secure remote access to local-only services (like dashboards) without exposing them publicly.

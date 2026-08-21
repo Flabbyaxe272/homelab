@@ -49,10 +49,10 @@ Cloudflare (DNS)
     ▼
 DigitalOcean VPS (Ubuntu Server)
 ├── nginx stream (entry point)
-├── WireGuard tunnel (encrypted back-channel)
-└── iptables (geo-IP blocking - US only, DDoS mitigation)
+├── iptables (geo-IP blocking - US only, DDoS mitigation)
+└── WireGuard tunnel (encrypted back-channel)
     │
-    ▼ (via WireGuard tunnel)
+    ▼ 
 Dude-server (Edge Device)
 ├── Traefik (reverse proxy + TLS termination)
 ├── AdGuard Home DNS1
@@ -123,7 +123,6 @@ AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically 
 | ------------------------- | ------------------- | --------------------------------------------------- |
 | **NextCloud + Collabora** | cloud.farrisfam.org | Document storage, digital file backup, live editing |
 | **Syncthing**             | Internal only       | Note syncing across phone and laptops               |
-| **TrueNAS**               | Internal            | 15.5TB usable, redundant storage                    |
 
 ### 📸 Media
 
@@ -138,7 +137,6 @@ AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically 
 | Service        | URL                   | Notes                                                      |
 | -------------- | --------------------- | ---------------------------------------------------------- |
 | **Gitea**      | Internal only         | Self-hosted git, redundant, mirrors to GitHub              |
-| **Recipebook** | recipes.farrisfam.org | MkDocs site, built in Gitea, deployed via Cloudflare Pages |
 
 ---
 

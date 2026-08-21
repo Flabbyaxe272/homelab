@@ -42,7 +42,6 @@ Internet
     ▼
 Cloudflare (DNS)
     │
-    ├──▶ TrueNAS Server (Main Services)
     ▼
 DigitalOcean VPS (Ubuntu Server)
 ├── nginx stream (entry point)

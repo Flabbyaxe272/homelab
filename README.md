@@ -1,12 +1,12 @@
-# 🏠 flabbyaxe's Homelab
+# flabbyaxe's Homelab
 
-**A production-grade home infrastructure built to solve real problems, not to collect hardware.**
+**A home infrastructure built to solve real problems, not to collect hardware.**
 
-> *Started with a NAS to cut cloud storage costs. Grew into a zero-trust, SSO-protected, family-serving platform after my mom's memories were sitting on 10-year-old dying hard drives.*
+> *Started with a NAS to cut cloud storage costs. Grew into a zero-trust, SSO-protected, family-serving platform over the course of two years.*
 
 ---
 
-## 👤 About
+## About
 
 | **Handle**   | flabbyaxe                                                         |
 | ------------ | ----------------------------------------------------------------- |
@@ -16,25 +16,29 @@
 
 ---
 
-## 🧠 Philosophy
+## Philosophy
 
-Every service in this homelab exists because it solved a real problem. Nothing is here for show.
+I realized something recently: 
 
-This started in September 2024 with a formal Change Request to my wife (yes, really) to justify replacing cloud storage subscriptions costing $200+/year with a self-hosted NAS. The math was clear. The proposal was approved. The homelab was born.
+> No one will take you seriously if you don't type it out yourself. 
 
-What followed was a cascading series of real problems demanding real solutions:
+So, I'm starting my documentation fresh. For people actually understand it. For 
+myself to understand it.
 
-- Family photos on aging hard drives -> **Immich + TrueNAS**
-- Non-technical family needing access -> **Authentik SSO**
-- Secure remote access without exposing home IP -> **WireGuard + VPS**
-- DDoS attack on public services -> **nginx + iptables geo-IP blocking**
-- Password sprawl across services -> **Authentik OpenID Connect for everything**
+This all started out with me wanting to save a few dollars in 2024. 
+After drafting up a Change Request form for my wife (ya, I'm a nerd), 
+I found that she actually agreed with me, and so the homelab was born. 
 
-The result is a zero-trust home infrastructure serving real non-technical users, maintained by one person, documented like a production environment.
+A few screws later, I'm running a photo storage service, a music server, a document
+server, audiobooks, movies, shows, archiving documentation, even dabbling in locally
+run AI models. 
+
+So none of this is for show. It's all for solutions to problems I've seen and grown
+to take advantage for the last 2 years. And I hope you find this documentation useful.
 
 ---
 
-## 🏗️ Architecture as current
+## Architecture as current
 
 ```
 Internet
@@ -42,169 +46,47 @@ Internet
     ▼
 Cloudflare (DNS)
     │
-    ├──▶ TrueNAS Server (Main Services)
+    ├──▶ Cloudflare Pages (offsite)
+    |     ├── Blog/portfolio (justin.farrisfam.org)
+    |     └── Recipebook (recipes.farrisfam.org)
+    |
     ▼
 DigitalOcean VPS (Ubuntu Server)
 ├── nginx stream (entry point)
-├── WireGuard tunnel (encrypted back-channel)
-└── iptables (geo-IP blocking - US only, DDoS mitigation)
+├── iptables (geo-IP blocking - US only, DDoS mitigation)
+└── WireGuard tunnel (encrypted back-channel)
     │
-    ▼ (via WireGuard tunnel)
+    ▼ 
 Dude-server (Edge Device)
 ├── Traefik (reverse proxy + TLS termination)
 ├── AdGuard Home DNS1
 └── Authentik (Identity Provider / SSO)
     │
-    ├──▶ TrueNAS Server (Main Services)
-    │     ├── Immich (photos.farrisfam.org)
-    │     ├── NextCloud + Collabora (cloud.farrisfam.org)
-    │     ├── Navidrome (music.farrisfam.org)
-    │     ├── Jellyfin (local only)
-    │     ├── Gitea (local only, mirrored to GitHub)
-    │     ├── Syncthing (local only)
-    │     └── AdGuard Home DNS2 (redundant)
-    │
-    └──▶ Cloudflare Pages (offsite)
-          └── Recipebook (recipes.farrisfam.org)
-```
-
-**Tailscale** provides secure remote access to local-only services (like dashboards) without exposing them publicly.
-
----
-
-## 🖥️ Hardware
-
-### TrueNAS - Main Service Server
-
-| Component | Spec |
-| --- | --- |
-| CPU | AMD Ryzen 5 4560 Pro (ECC support) |
-| RAM | 32GB DDR4 ECC |
-| Storage | 30TB raw / 15.5TB usable with redundancy |
-| OS | TrueNAS SCALE |
-
-*Started with a 3-way mirror at 3TiB. Expanded with 2×10TB drives (Christmas 2025) to support whole-family photo storage.*
-
-### HP Laptop - Edge Device
-
-| Component | Spec |
-| --- | --- |
-| OS | Ubuntu Server |
-| Role | Network edge, Traefik reverse proxy, Authentik IdP, AdGuard DNS1 |
-
-*Originally a Docker experimentation device. Repurposed as the network edge device due to its limited compute - keeping heavy services off the critical path.*
-
----
-
-## ⚙️ Services
-
-### 🔐 Identity & Access
-
-| Service | URL | Notes |
-|---|---|---|
-| **Authentik** | auth.farrisfam.org | Central IdP - OpenID Connect SSO for all services |
-
-Every public-facing service authenticates through Authentik. One account, one login, every service. Non-technical family members (parents, siblings) can access Immich and Navidrome without managing multiple credentials.
-
-### 🌐 Networking & Proxy
-
-| Service | Access | Notes |
-|---|---|---|
-| **Traefik** | Internal | Reverse proxy + automatic TLS |
-| **AdGuard Home** | Internal only | DNS blocklisting, redundant across both servers |
-| **Tailscale** | Remote | Zero-trust remote access to internal services |
-
-AdGuard runs on both servers (DNS1 on edge device, DNS2 on TrueNAS), physically separated for redundancy. DNS-over-HTTPS is a work in progress.
-
-### 📁 Storage & Files
-
-| Service                   | URL                 | Notes                                               |
-| ------------------------- | ------------------- | --------------------------------------------------- |
-| **NextCloud + Collabora** | cloud.farrisfam.org | Document storage, digital file backup, live editing |
-| **Syncthing**             | Internal only       | Note syncing across phone and laptops               |
-| **TrueNAS**               | Internal            | 15.5TB usable, redundant storage                    |
-
-### 📸 Media
-
-| Service | URL | Notes |
-|---|---|---|
-| **Immich** | photos.farrisfam.org | Family photo platform - primary family service |
-| **Navidrome** | music.farrisfam.org | Personal music collection streaming |
-| **Jellyfin** | Internal only | Film library |
-
-### 🛠️ Development
-
-| Service        | URL                   | Notes                                                      |
-| -------------- | --------------------- | ---------------------------------------------------------- |
-| **Gitea**      | Internal only         | Self-hosted git, redundant, mirrors to GitHub              |
-| **Recipebook** | recipes.farrisfam.org | MkDocs site, built in Gitea, deployed via Cloudflare Pages |
-
----
-
-## 🔒 Security Model
-
-Public services never directly expose the home network. The full traffic path for an external request:
+    └──▶ TrueNAS Server (Main Services)
+          ├── Immich (photos.farrisfam.org)
+          ├── NextCloud + Collabora (cloud.farrisfam.org)
+          ├── Navidrome (music.farrisfam.org)
+          ├── Jellyfin (local only)
+          ├── Gitea (local only, mirrored to GitHub)
+          ├── Syncthing (local only)
+          └── AdGuard Home DNS2 (redundant)
 
 ```
-User -> Cloudflare DNS -> DigitalOcean VPS
-    -> nginx (entry point) + iptables (geo-block non-US IPs)
-    -> WireGuard encrypted tunnel
-    -> Traefik (reverse proxy + TLS)
-    -> Authentik (auth check)
-    -> Service
-```
-
-The VPS was added after a DDoS incident on public services. Response: spun up a DigitalOcean droplet, configured nginx as a proxy, implemented iptables rules to block non-US traffic. Incident resolved. Geo-blocking has been in place since.
-
-**Secret management:** All sensitive values (passwords, API keys, tokens) are kept in `.env` files excluded from version control via `.gitignore`. Repos contain `.env.example` files with placeholder values.
 
 ---
 
-## 📋 Change Requests
-
-This homelab is managed with formal Change Requests - documented proposals written before implementing significant changes. Each CR covers the problem being solved, alternatives considered, implementation plan, and risks.
-
-| CR         | Date     | Summary/Title                                                  |
-| ---------- | -------- | -------------------------------------------------------------- |
-| CR-001     | Sep 2024 | Initial NAS deployment (replacing cloud storage subscriptions) |
-| CR-002     | Jan 2025 | Adjusting DNS Infrastructure                                   |
-| CR-003     | May 2026 | Home Network Segmentation & Infrastructure Cleanup             |
-
----
-
-## ⚠️ Known Limitations & Next Steps
-
-Documenting gaps is part of operating honestly.
-
-| Limitation                          | Impact                                                      | Planned Solution                    |
-| ----------------------------------- | ----------------------------------------------------------- | ----------------------------------- |
-| Consumer router as primary firewall | Limited network segmentation                                | Replace with OPNsense or pfSense    |
-| No managed switch                   | Can't enforce VLAN separation between IoT, servers, clients | Managed switch + VLAN configuration |
-| AdGuard not yet on DNS-over-HTTPS   | DNS queries unencrypted in transit                          | DoH configuration (in progress)     |
-
----
-
-## 📁 Repo Structure (WIP)
+## 📁 Repo Structure
 
 ```
 homelab/
 ├── README.md
-├── change-requests/
-│   ├── CR001-NetworkAttachedStorage.md
-│   ├── CR002-CloudDnsServer.md
-│   └── CR003-NetworkUpgrade.md
-├── architecture/
-│   ├── network-diagram.drawio           # Coming soon
-│   └── network-diagram.png              # Coming soon
-├── authentik/                           # Coming soon
-│   ├── docker-compose.yml               # Coming soon
-│   ├── .env.example                     # Coming soon
-│   └── README.md                        # Coming soon
-├── traefik/
-│   ├── docker-compose.yml
-│   ├── .env.example
+├── dude-server/
+│   ├── README.md
+├── truenas/
 │   └── README.md
-└── adguard/                             # Coming soon
+├── vps/
+│   └── README.md
+└── change-requests/
 ```
 
 ---

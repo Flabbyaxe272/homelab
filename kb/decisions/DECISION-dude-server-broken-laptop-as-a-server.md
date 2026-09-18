@@ -1,6 +1,6 @@
 # Why use a broken laptop as a server?
 
-> Decision for [dude-server](/dude-server/README.md)
+> Decision for [dude-server](dude-server/README.md)
 
 When I started, the dude-server was the only computer I had, and the budget was zero. Being pushed 
 to use what we had without spending more money, I figured I'd learn a few things with it. 

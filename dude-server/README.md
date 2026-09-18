@@ -34,7 +34,7 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Host: HP EliteBook 840 G3
 
 ## Key Decisions
 
-> [Why use a broken laptop as a server?](homelab_Public/kb/decisions/DECISION-dude-server-broken-laptop-as-a-server)
+> [Why use a broken laptop as a server?](/kb/decisions/DECISION-dude-server-broken-laptop-as-a-server)
 
 > Why Docker labels for local containers but file providers for TrueNAS services?
 

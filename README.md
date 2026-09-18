@@ -18,12 +18,11 @@
 
 ## Philosophy
 
-I realized something recently: 
+I realized something recently:
 
-> No one will take you seriously if you don't type it out yourself. 
+> No one will take you seriously if you don't type it out yourself.
 
-So, I'm starting my documentation fresh. For people actually understand it. For 
-myself to understand it.
+So, I'm starting my documentation fresh. For people actually understand it. For myself to understand it.
 
 This all started out with me wanting to save a few dollars in 2024. 
 After drafting up a Change Request form for my wife (ya, I'm a nerd), 

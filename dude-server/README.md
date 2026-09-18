@@ -1,5 +1,9 @@
 # Dude-server
 
+## Reason for existing
+
+## Services
+
 ## Specs
 
 ```
@@ -30,25 +34,15 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Host: HP EliteBook 840 G3
 
 ## Key Decisions
 
-> Why use a broken laptop as a server?
-
-Initially, it was the only spare computer I had. Being pushed to use what we had
-without spending more money, I figured I'd learn a few things with it. And oh boy, did 
-I learn a few things. Because of this computer, I learned: 
-
-- How to repair a laptop keyboard
-- How to install Ubuntu Server
-- How to manage Docker without a GUI
-- Get comfortable managing networking within a system with iptables and ufw
-- Getting comfortable with the command line (and consequently looking up commands in Google)
-- How Traefik (and ultimately reverse-proxies) work
-- Learning that I love IaC (infrastructure as code) with Traefik v3 config files.
+> [Why use a broken laptop as a server?](homelab_Public/kb/decisions/DECISION-dude-server-broken-laptop-as-a-server)
 
 > Why Docker labels for local containers but file providers for TrueNAS services?
 
-I found that when using Traefik, it doesn't do well trying to discover services 
-outside it's own box. So, I use static files to declare where my services are. The \
+I found that when using Traefik, it doesn't attempt to discover services 
+outside it's own box. So, I use static files to declare where my services are. The
 downside to this is now I have two places to look for when a route needs debugging.
+
+> 
 
 ## Story
 

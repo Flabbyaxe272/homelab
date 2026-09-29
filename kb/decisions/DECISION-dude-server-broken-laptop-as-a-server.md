@@ -1,3 +1,11 @@
+---
+tags:
+  - dude-server
+created: 2026-09-18
+last-edited: 2026-09-28
+---
+
+
 # Why use a broken laptop as a server?
 
 > Decision for [dude-server](dude-server/README.md)

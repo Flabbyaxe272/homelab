@@ -1,13 +1,27 @@
+---
+tags:
+  - dude-server
+created: 2026-09-18
+last-edited: 2026-10-04
+---
+
+
 # Dude-server
 
 ## Reason for existing
 
+Started out as an extra device I've had, and then it started becoming an integral part for hosting services. 
+
 ## Services
+
+- Traefik
+- Authentik
+- Adguard Home
 
 ## Specs
 
 ```
-flabbyaxe@the-dude-server:~$ neofetch
+admin@the-dude-server:~$ neofetch
             .-/+oossssoo+/-.
         `:+ssssssssssssssssss+:`
       -+ssssssssssssssssssyyssss+-
@@ -15,7 +29,7 @@ flabbyaxe@the-dude-server:~$ neofetch
    /ssssssssssshdmmNNmmyNMMMMhssssss/
   +ssssssssshmydMMMMMMMNddddyssssssss+
  /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/
-.ssssssssdMMMNhsssssssssshNMMMdssssssss.   flabbyaxe@the-dude-server
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.   admin@the-dude-server
 +sssshhhyNMMNyssssssssssssyNMMMysssssss+   -------------------------
 ossyNMMMNyMMhsssssssssssssshmmmhssssssso   OS: Ubuntu 24.04.5 LTS x86_64
 ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Host: HP EliteBook 840 G3

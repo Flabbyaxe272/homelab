@@ -1,9 +1,16 @@
+---
+tags:
+  - vps
+created: 2026-09-18
+last-edited: 2026-10-04
+---
+
 # Virtual Private Server (VPS)
 
 ## Specs
 
 ```bash
-            .-/+oossssoo+/-.               flabbyaxe@ubuntu-s-1vcpu-512mb-10gb-sfo3-01
+            .-/+oossssoo+/-.               admin@ubuntu-s-1vcpu-512mb-10gb-sfo3-01
         `:+ssssssssssssssssss+:`           -------------------------------------------
       -+ssssssssssssssssssyyssss+-         OS: Ubuntu 24.04.5 LTS x86_64
     .ossssssssssssssssssdMMMNysssso.       Host: Droplet 20171212
@@ -29,8 +36,3 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso   CPU: DO-Regular (1) @ 2.494GHz
 ## Key Decisions
 
 [[DECISION-vps-spinning-up|Why have a VPS?]]
-
-
-
-
-## Story
